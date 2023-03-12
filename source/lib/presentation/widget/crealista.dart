@@ -183,7 +183,23 @@ class _CreaDiscussioneState extends State<CreaDiscussione> {
                   CardImaggine(
                     immagine: widget.snapshot.data![widget.index]!.pathImmagine,
                   ),
-                  Text(widget.snapshot.data![widget.index]!.categoria),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
+                      child: Text(
+                        "- " +
+                            widget.snapshot.data![widget.index]!.categoria[0]
+                                .toUpperCase() +
+                            widget.snapshot.data![widget.index]!.categoria
+                                .substring(1)
+                                .toLowerCase(),
+                        textAlign: TextAlign.end,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
                   Stack(
                     children: [
                       Container(
