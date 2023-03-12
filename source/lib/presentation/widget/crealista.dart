@@ -183,6 +183,7 @@ class _CreaDiscussioneState extends State<CreaDiscussione> {
                   CardImaggine(
                     immagine: widget.snapshot.data![widget.index]!.pathImmagine,
                   ),
+                  Text(widget.snapshot.data![widget.index]!.categoria),
                   Stack(
                     children: [
                       Container(

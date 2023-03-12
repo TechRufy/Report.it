@@ -5,6 +5,7 @@ import 'package:report_it/data/models/AutenticazioneDAO.dart';
 import 'package:report_it/application/entity/entity_GA/super_utente.dart';
 import 'package:report_it/application/entity/entity_GA/tipo_utente.dart';
 import 'package:report_it/application/entity/entity_GF/discussione_entity.dart';
+import 'package:http/http.dart' as http;
 
 class ForumService {
   static Future<List<Discussione?>>? _discussioni_all;
@@ -62,6 +63,20 @@ class ForumService {
       await c.then((value) {
         d.setpathImmagine(value);
       });
+
+      final response = await http
+          .post(Uri.parse("http://techrufy.pythonanywhere.com/"), body: testo);
+
+      if (response.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        d.categoria = response.body;
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
+
       ForumDao().AggiungiDiscussione(d);
       return "tutto ok";
     } else {
@@ -75,6 +90,19 @@ class ForumService {
           pathImmagine: "",
           [],
           tipo);
+      final response = await http
+          .post(Uri.parse("http://techrufy.pythonanywhere.com/"), body: testo);
+
+      if (response.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        d.categoria = response.body;
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
+
       ForumDao().AggiungiDiscussione(d);
       return "tutto ok";
     }
@@ -173,23 +201,62 @@ class ForumService {
       var c = ForumDao().caricaImmagne(file);
 
       Discussione d = Discussione(
-          DateTime.now(), user!.uid, 0, testo, titolo, "Aperta", [], tipo);
+        DateTime.now(),
+        user!.uid,
+        0,
+        testo,
+        titolo,
+        "Aperta",
+        [],
+        tipo,
+      );
       await c.then((value) {
         d.setpathImmagine(value);
       });
+
+      final response = await http
+          .post(Uri.parse("http://techrufy.pythonanywhere.com/"), body: testo);
+
+      if (response.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        d.categoria = response.body;
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
+
       ForumDao().AggiungiDiscussione(d);
       return "tutto ok";
     } else {
       Discussione d = Discussione(
-          DateTime.now(),
-          user!.uid,
-          0,
-          testo,
-          titolo,
-          "Aperta",
-          pathImmagine: "",
-          [],
-          tipo);
+        DateTime.now(),
+        user!.uid,
+        0,
+        testo,
+        titolo,
+        "Aperta",
+        pathImmagine: "",
+        [],
+        tipo,
+      );
+
+      final response = await http
+          .post(Uri.parse("http://techrufy.pythonanywhere.com/"), body: testo);
+
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        d.categoria = response.body;
+      } else {
+        print(response.statusCode);
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to add category');
+      }
       ForumDao().AggiungiDiscussione(d);
       return "tutto ok";
     }
@@ -225,6 +292,18 @@ class ForumService {
       await c.then((value) {
         d.setpathImmagine(value);
       });
+      final response = await http
+          .post(Uri.parse("http://techrufy.pythonanywhere.com/"), body: testo);
+
+      if (response.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        d.categoria = response.body;
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
       ForumDao().AggiungiDiscussione(d);
       return "tutto ok";
     } else {
@@ -238,6 +317,18 @@ class ForumService {
           pathImmagine: "",
           [],
           tipo);
+      final response = await http
+          .post(Uri.parse("http://techrufy.pythonanywhere.com/"), body: testo);
+
+      if (response.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        d.categoria = response.body;
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        throw Exception('Failed to create album.');
+      }
       ForumDao().AggiungiDiscussione(d);
       return "tutto ok";
     }
