@@ -248,12 +248,11 @@ class ForumService {
       print(response.statusCode);
 
       if (response.statusCode == 200) {
-        // If the server did return a 201 CREATED response,
+        // If the server did return a 200 CREATED response,
         // then parse the JSON.
         d.categoria = response.body;
       } else {
-        print(response.statusCode);
-        // If the server did not return a 201 CREATED response,
+        // If the server did not return a 200 CREATED response,
         // then throw an exception.
         throw Exception('Failed to add category');
       }
